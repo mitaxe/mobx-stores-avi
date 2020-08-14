@@ -1,21 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useLocalStore } from 'mobx-react';
+import { Playground } from './src/scenes';
+import { createStore, storeContext } from './src/stores';
+import 'mobx-react-lite/batchingForReactNative'
 
 export default function App() {
+  const store = useLocalStore(createStore);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <storeContext.Provider value={store}>
+      <Playground />
+    </storeContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
